@@ -6,7 +6,7 @@ import {
     deleteHabit
 } from '../controllers/habit.controller.js';
 import { authenticate } from '../middleware/auth.middleware.js';
-import { validateHabit } from '../middleware/validation.middleware.js';
+import { validateHabit, validateUpdateHabit } from '../middleware/validation.middleware.js';
 
 
 
@@ -16,7 +16,7 @@ router.use(authenticate);
 
 router.get('/', getHabits);
 router.post('/', validateHabit, createHabit);
-router.put('/:id', validateHabit, updateHabit);
+router.put('/:id', validateUpdateHabit, updateHabit)
 router.delete('/:id', deleteHabit);
 
 export default router;

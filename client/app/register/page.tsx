@@ -24,7 +24,7 @@ export default function RegisterPage() {
         try {
             await api.post('/auth/register', form)
             toast.success('Registration successful!')
-            router.push('/login')
+            router.push('/')
         } catch (err: any) {
             toast.error(err?.response?.data?.message || 'Registration failed')
 

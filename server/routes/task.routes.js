@@ -4,9 +4,10 @@ import {
     createTask,
     updateTask,
     deleteTask
+
 } from '../controllers/task.controller.js';
 import { authenticate } from '../middleware/auth.middleware.js';
-import { validateTask } from '../middleware/validation.middleware.js';
+import { validateTask, validateUpdateTask } from '../middleware/validation.middleware.js';
 
 
 
@@ -16,7 +17,7 @@ router.use(authenticate);
 
 router.get('/', getTasks);
 router.post('/', validateTask, createTask);
-router.put('/:id', validateTask, updateTask);
+router.put('/:id', validateUpdateTask, updateTask)
 router.delete('/:id', deleteTask);
 
 export default router;

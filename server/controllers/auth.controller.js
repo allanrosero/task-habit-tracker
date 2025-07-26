@@ -38,3 +38,23 @@ export const login = async (req, res) => {
         res.status(500).json({ message: 'Login failed', error: err.message });
     }
 };
+
+export const me = async (req, res) => {
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.split(' ')[1];
+
+    if (!token) return res.status(401).json({ message: 'No token' });
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await prisma.user.findUnique({
+            where: { id: decoded.userId },
+            select: { id: true, email: true, name: true },
+        });
+
+        res.json(user);
+    } catch {
+        res.status(401).json({ message: 'Invalid token' });
+    }
+};
+
