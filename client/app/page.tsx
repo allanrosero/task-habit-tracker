@@ -24,7 +24,7 @@ export default function LoginPage() {
     try {
       const res = await api.post('/auth/login', form)
       setToken(res.data.token)
-      toast.success('Registration successful!')
+      toast.success('Login successful!')
       setTimeout(() => {
         router.push('/dashboard')
       }, 1000);
